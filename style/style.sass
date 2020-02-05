@@ -1,0 +1,988 @@
+@import url(https://rsms.me/inter/inter.css)
+
+html
+      font-family: 'Inter', sans-serif
+html, body
+      height: 100%
+
+*, *:before, *:after
+      box-sizing: border-box
+      
+$primaryBlue: #2b8ff4
+$lightBlue: rgba(43, 143, 244, .2)
+$lightBlueHover: rgba(43, 143, 244, .3)
+$lightGrey: rgba(255,255,255,.1)
+$borderGrey: #ebedee
+$labelGrey: #99a9b1
+$disabledGrey: #7a8388
+$borderRad: 5px
+$globalMargin: 24px
+
+@mixin flex($align-items: center, $justify-content: center, $flex-direction: row)
+      display: flex
+      align-items: $align-items
+      justify-content: $justify-content
+      flex-direction: $flex-direction
+
+@mixin size($size)      
+      width: $size
+      height: $size
+
+@mixin box
+      background-color: #ffffff
+      border-radius: $borderRad
+
+body
+      background-color: $borderGrey
+
+.close__menu
+      position: absolute
+      top: 24px
+      right: 24px
+      .cross_svg
+            transform: rotate(45deg)
+      &:hover .cross
+            stroke: $primaryBlue
+
+.btn
+      color: $primaryBlue
+      font-size: 16px
+      font-weight: 500
+      border-radius: $borderRad
+      padding: 12px 24.5px
+      border: 2px solid transparent
+      transition: background .1s ease
+      &--full-width
+            width: 100%
+
+.btn__primary
+      background-color: $lightBlue
+      &--margin
+            margin: 0 $globalMargin
+      &:hover
+            background-color: $primaryBlue
+            color: #ffffff
+      &--white
+            background-color: #ffffff
+            font-weight: normal
+            text-transform: capitalize
+            overflow: hidden
+            border: none
+            & span
+                  background-image: linear-gradient(252deg, #a065e0, #2b8ff4)
+                  font-family: Inter
+                  font-size: inherit
+                  font-weight: bold
+                  font-stretch: normal
+                  font-style: normal
+                  line-height: 1.5
+                  letter-spacing: normal
+                  text-align: center
+                  -webkit-background-clip: text
+                  background-clip: text
+                  -webkit-text-fill-color: transparent   
+            &:hover
+                  & span
+                        -webkit-background-clip: none
+                        background-clip: none
+                        color: $primaryBlue
+                        -webkit-text-fill-color: $primaryBlue 
+
+.btn__secondary
+      border: 2px solid $lightBlue
+      padding: 10px 25.5px
+      &:hover
+            border: 2px solid $primaryBlue
+
+      &--nobg
+            background: none
+            color: #ffffff
+            font-weight: normal
+            text-transform: capitalize
+            margin-right: $globalMargin
+            &:hover
+                  border: 2px solid #ffffff
+
+.btn--blue
+      background-color: $primaryBlue
+      color: #ffffff
+      &:hover
+            background-color: #066cd4
+
+.btn__manage-team
+      text-transform: capitalize
+      margin-top: $globalMargin
+
+.plan__btns
+      @include flex($justify-content: flex-end)
+      align-self: flex-end
+
+.link__primary
+      color: $primaryBlue
+      &:hover
+            color: #5CB3FF
+
+.menu__link
+      color: #000000
+      font-size: 16px
+      line-height: 24px
+      transition: color .1s ease
+
+.container
+      position: relative
+
+.main__menu
+      position: absolute
+      top: 0
+      left: 0
+      transform: translateX(-100%)
+      transition: transform .3s ease
+      height: 100vh
+      position: fixed
+      min-width: 360px
+      background-color: #ffffff
+      z-index: 300
+      @include flex($flex-direction: column)
+      &--logo
+            @include flex    
+      .logo
+            margin-right: $globalMargin
+
+.menu__header
+      padding: 40px 32px 32px 32px
+      border-bottom: 1px solid $borderGrey
+      width: 100%
+      @include flex($flex-direction: column)
+      align-items: flex-start
+
+.menu__list
+      padding: 32px 0 
+      width: 100%        
+
+.list__item
+      cursor: pointer
+      width: 100%
+      padding: 8px 0 
+      padding-left: 32px
+      border-right: 2px solid transparent
+      transition: background .1s ease
+      &:hover 
+            background-color: $lightBlue
+            .menu__link
+                  color: $primaryBlue
+.item--active
+      background-color: $lightBlue
+      border-right: 2px solid $primaryBlue
+      .menu__link
+            color: $primaryBlue
+
+.separator
+      height: 40px
+      width: 1px
+      background-color: $borderGrey
+      margin-right: $globalMargin
+      display: block
+
+.user
+      border-top: 1px solid $borderGrey
+      width: 100%
+      @include flex($justify-content: flex-start)
+      min-height: 108px
+      padding: 34px 28px 34px 32px
+      &__avatar
+            margin-right: $globalMargin
+      &__name
+            font-size: 16px
+            line-height: 24px
+      &__position
+            text-transform: uppercase
+            color: $labelGrey
+            font-size: 12px
+            line-height: 16px
+            letter-spacing: .5px
+      &__settings
+            margin-top: auto
+            width: 100%
+            color: inherit
+            &:hover
+                  background-color: $lightBlue
+      &__arrow
+            margin-left: auto
+
+.top__bar
+      background-color: #191d1f
+      width: 100%
+      height: 80px
+      padding: $globalMargin
+      @include flex
+      &__container
+            width: 100%
+            @include flex
+
+.logo
+      @include size(41px)
+      margin-right: 23px
+
+.breadcrumbs
+      flex: 100%
+
+.overlay
+      height: 100%
+      width: 100%
+      position: absolute
+      top: 0
+      left: 0
+      background-color: #191d1f
+      opacity: .2
+      z-index: 200
+      display: none
+
+.selected__app
+      @include flex
+      width: 215px
+      height: 40px
+      color: #fff
+      border-radius: $borderRad
+      background-color: $lightGrey
+      font-size: 14px
+      line-height: 22px
+      padding: 16px
+      > .link
+            margin-left: 4px
+
+.btn__search
+      background-color: transparent
+      cursor: pointer
+      padding: 10px
+      position: relative
+      right: 5px
+      @include size(40px)
+
+.search__container
+      @include flex
+
+.search__input
+      height: 40px
+      width: 0
+      background-color: $lightGrey
+      color: #ffffff     
+      border-radius: $borderRad
+      position: relative
+      right: -35px
+      padding: 0
+      transition: width .3s ease
+      font-size: 14px
+      &::placeholder
+            color: #ffffff
+
+.loupe
+      @include size(16px)
+      pointer-events: none
+
+.btn__menu
+      @include size(40px)
+      background-color: $lightGrey
+      border-radius: $borderRad
+      @include flex
+
+@mixin hamburgerLine
+      width: 16px
+      height: 2px
+      border-radius: 1px
+      background-color: #ffffff
+      display: block
+      position: relative
+
+.hamburger
+      pointer-events: none
+      @include hamburgerLine
+      &::before
+            content: ''
+            @include hamburgerLine
+            position: absolute
+            top: -8px
+      &::after
+            content: ''
+            @include hamburgerLine
+            position: absolute
+            top: 8px
+
+.main__container
+      @include flex($flex-direction: column)
+      padding: $globalMargin 0
+      background-color: $borderGrey
+
+.section__content, .top__content
+      @include flex
+      flex-flow: row wrap
+      width: 100%
+      padding: 0 $globalMargin
+
+.dashboard__header
+      @include flex($justify-content: space-between)
+      width: 100%
+
+.section__title
+      font-size: 24px
+
+.cta__btns
+      @include flex
+
+.dashboard__menu__container
+      @include box
+      height: 64px
+      width: 100%
+      margin: 24px 0
+      @include flex($justify-content: space-between)
+
+.subtitle
+      font-size: 16px
+      width: 100%
+      height: 64px
+      padding: 20px 22px
+      line-height: 24px
+      @include flex($justify-content: flex-start)
+      &--underline
+            border-bottom: 1px solid $borderGrey
+
+.subsection__label
+      font-size: 12px
+      color: $labelGrey  
+      letter-spacing: 0.5px
+      text-transform: uppercase
+      font-weight: 600
+      line-height: 15px
+      margin-top: $globalMargin
+      &--client
+            margin-top: 34px
+
+.dashboard__nav
+      width: 72px
+      height: 100%
+      @include flex
+      border-left: 1px solid $borderGrey
+      &__btn
+            @include flex
+            @include size(100%)
+            padding: 0
+
+@mixin dot
+      @include size(4px)
+      border-radius: 50%
+      background-color: $primaryBlue
+      position: absolute
+      display: block
+
+.dots
+      @include dot
+      position: relative
+      pointer-events: none
+      &::before
+            content: ''
+            @include dot
+            left: -10px
+      &::after
+            content: ''
+            @include dot
+            left: 10px            
+ 
+.filters__container
+      width: 66%
+      height: auto
+      margin-right: $globalMargin
+      @include box
+      @include flex($flex-direction: column, $justify-content: flex-start)
+      align-self: flex-start
+
+.filters
+      width: 100%
+      position: relative
+      padding: 0 22px
+
+.filter
+      @include flex($flex-direction: column, $align-items: flex-start)
+      margin-top: 20px
+
+.checkbox__container
+      @include flex
+      cursor: pointer
+
+.actual__checkbox
+      display: none
+      &:checked ~ .checkbox
+            background-color: $primaryBlue
+            border: 2px solid $primaryBlue
+            &::after
+                  opacity: 1
+                  transform: rotate(-45deg) scale(1)
+      &:checked ~ .checkbox__title
+            color: #000000
+
+.checkbox__title
+      order: 2
+      color: $disabledGrey
+      font-size: 16px
+      text-transform: capitalize
+
+.checkbox
+      @include size(20px)
+      display: block
+      background-color: #ffffff
+      border: solid 2px #d0d2d2
+      border-radius: 2px
+      order: 1
+      position: relative
+      margin-right: 16px
+      &::after
+            content: ''
+            opacity: 0
+            transition: all .3s ease
+            display: block
+            position: absolute
+            top: 2px
+            left: 1px
+            border-left: 2px solid #ffffff
+            border-bottom: 2px solid #ffffff
+            transform: rotate(-45deg) scale(0)
+            height: 8px
+            width: 14px
+
+.arrow  
+      position: relative
+      right: 0
+      pointer-events: none
+
+.placeholder
+      color: $disabledGrey
+
+.options__list
+      transition: height .3s ease
+      height: 0
+      width: calc(100% - 44px)
+      position: absolute
+      background-color: #ffffff
+      overflow: hidden
+      z-index: 100
+      border-bottom: 0px solid $primaryBlue
+
+.option
+      @include flex($justify-content: flex-start)
+      width: 100%
+      height: 48px
+      padding: $globalMargin 0
+      background-color: $lightBlue
+      position: relative
+      color: #000000
+      &::before
+            content: '-'
+            margin: 0 22.5px
+      &:hover
+            background-color: RGBA(92,179,255,.1)
+      label
+            height: 100%
+            width: 100%
+            @include flex($justify-content: flex-start)
+            position: absolute
+            padding-left: 45px
+            cursor: pointer
+    
+.select__active
+      @include flex($justify-content: space-between)
+      width: 100%
+      height: 48px
+      border: 1px solid $borderGrey
+      border-radius: 4px
+      margin-top: 16px
+      outline: none
+      padding: $globalMargin
+      cursor: pointer
+      &:focus
+            outline: -webkit-focus-ring-color auto 1px
+
+.actual__option
+      display: none
+ 
+.apply__filters
+      border-top: 1px solid $borderGrey
+      margin-top: 41px
+      padding: 0 $globalMargin
+      height: 96px
+      @include flex
+
+.stats__container
+      flex: 1
+      align-self: flex-start
+
+.stats__card
+      height: 100px
+      width: 100%
+      padding: $globalMargin
+      @include box
+      @include flex($justify-content: flex-start)
+      &:not(:first-child)
+            margin-top: $globalMargin
+
+.stats__title
+      font-size: 12px
+      text-transform: uppercase
+      letter-spacing: .5px
+      color: $labelGrey
+      
+.card__icon
+      border-radius: 50%
+      @include flex
+      min-width: 52px
+      min-height: 52px
+      margin-right: $globalMargin
+
+.stats
+      @include flex($flex-direction: column, $align-items: flex-start)
+      &-no
+            font-size: 20px
+            margin-top: 4px
+
+.employees
+      background-color: $lightBlue
+
+.request
+      background-color: rgba(98, 212, 128, .2)
+
+.activity-score
+      background-color: rgba(244, 152, 43, .2)   
+
+.solved
+      background-color: rgba(160, 101, 224, .2)
+
+.tables__container
+      @include box
+      @include flex($flex-direction: column)
+      width: 100%
+      margin-top: $globalMargin
+      height: 372px
+      max-height: 372px
+      overflow: hidden
+      position: relative
+
+.tabs__container
+      width: 100%
+      @include flex($justify-content: flex-start)
+      border-bottom: 1px solid $borderGrey
+      margin-bottom: auto
+
+.tab
+      font-size: 16px
+      text-transform: capitalize
+      padding: $globalMargin
+      border-bottom: 2px solid transparent
+      color: $disabledGrey
+      position: relative
+      bottom: -1px
+      &--active
+            border-bottom: 2px solid $primaryBlue
+            color: #000000
+      &:not(.tab--active):hover
+            border-bottom: 2px solid $lightBlue
+            color: $primaryBlue
+            cursor: pointer
+            
+.table__container
+      padding: 0 $globalMargin $globalMargin $globalMargin
+      width: 100%
+      position: absolute
+      bottom: 0
+      transition: transform .2s ease
+
+.table
+      display: block
+      overflow-x: auto
+      white-space: nowrap
+      width: 100%
+      height: 100%
+      border: 1px solid $borderGrey
+      margin-top: $globalMargin
+      border-radius: 4px
+
+.thead
+      padding: 20px 24px
+      background-color: $borderGrey
+      & .tr, .th
+            height: 64px
+
+.table__activity
+      transform: translateY(100%)
+
+.tr .td:first-child, .tr .th:first-child
+      margin-left: $globalMargin
+
+.tr .td:last-child, .tr .th:last-child
+      margin-right: $globalMargin   
+
+.th, .td
+      display: inline-flex
+      align-items: center
+      width: 228px
+      height: 56px
+      text-transform: capitalize
+
+.th
+      font-size: 16px
+      
+.td
+      color: $disabledGrey
+      font-size: 14px
+
+.tbody .tr:hover
+      background-color: rgba(240,240,240,.3)
+
+.person__details 
+      position: relative
+      padding-left: 48px
+      .avatar
+            width: 32px
+            height: 32px
+            margin-right: 8px
+            display: inline-block
+            position: absolute
+            top: -9px
+            left: 0
+
+.tr:not(:last-child) td
+      border-bottom: 1px solid $borderGrey
+
+.tr:last-child
+      border-bottom: 1px solid $borderGrey
+
+.table::-webkit-scrollbar-track
+      background-color: transparent
+
+.table::-webkit-scrollbar
+      height: 24px
+      background-color: transparent
+
+.table::-webkit-scrollbar-thumb
+      border-radius: 14px
+      border: 8px solid #ffffff
+      background-color:  #ced2d4
+
+@mixin status__bull
+      @include size(4px)
+      border-radius: 50%
+      margin-right: 8px
+      display: inline-block
+      position: relative
+      top: -3px
+
+.status-solved::before
+      content: ''
+      @include status__bull
+      background-color: #62d480
+
+.status-in-progress::before
+      content: ''
+      @include status__bull
+      background-color: #f4982b
+
+.status-accepted::before
+      content: ''
+      @include status__bull
+      background-color: #62d480
+
+.files__container
+      @include box
+      width: 100%
+      margin-top: $globalMargin
+      padding-bottom: $globalMargin
+
+.files__header
+      padding-right: $globalMargin
+      height: 64px
+      width: 100%
+      border-bottom: 1px solid $borderGrey
+      @include flex($justify-content: space-between)
+     
+.recently__added
+      padding: 0 23px
+
+.files
+      margin-top: 15px
+      width: 100%
+      @include flex($justify-content: flex-start)
+      flex-wrap: wrap
+ 
+.recently-added--icon
+            margin-right: $globalMargin
+
+@mixin filesIcon    
+      @include size(51px)
+      @include flex
+      border-radius: $borderRad  
+
+.pdf-icon
+      @include filesIcon
+      background-color: rgba(239, 63, 63, .2)
+
+.docx-icon
+      @include filesIcon
+      background-color: rgba(61, 104, 211, .2)
+
+.csv-icon
+      @include filesIcon
+      background-color: rgba(48, 148, 76, .2)     
+
+.plan__text
+      text-align: left
+      width: 100%
+
+.upgrade__plan
+      width: 100%
+      border-radius: $borderRad
+      margin-top: $globalMargin
+      padding: 32px $globalMargin $globalMargin $globalMargin
+      background: linear-gradient(to left, #a065e0, #2b8ff4)
+      color: #ffffff
+      min-height: 224px
+      @include flex($justify-content: space-between, $flex-direction: column)
+
+.plan__slogan
+      font-size: 24px
+      line-height: 32px
+      margin-bottom: 16px
+
+.plan__description
+      font-size: 14px
+      line-height: 24px
+      font-weight: 300
+      margin-bottom: $globalMargin
+
+.new__widget
+      width: 100%
+      height: 200px
+      @include flex
+      margin-top: $globalMargin
+      border: 2px dotted #acaeaf
+      border-radius: $borderRad
+      cursor: pointer
+      &:hover
+            background-color: rgba(255,255,255,.4)
+
+.plan_widget
+      @include flex($flex-direction: column)
+      width: 100%
+
+.add__new__widget
+      @include flex
+
+.plus--icon
+      margin-right: 10px
+      margin-top: 1px
+
+
+                                          // ############ MEDIA ##########
+      
+
+@media all and (max-width: 720px)
+      .logo
+            margin-right: 0
+
+      .section__title
+            font-size: 20px
+
+      .filters__container
+            width: 100%
+            margin-right: 0
+            margin-bottom: 24px
+
+      .cta__btn
+            font-size: 10px
+            padding: 12px 7.5px
+
+      .breadcrumbs
+            position: absolute
+            top: 84px
+            left: 0
+
+      .selected__app
+            color: #000000
+            background: none
+
+      .main__container
+            margin-top: 24px
+
+      .top__bar__container
+            justify-content: space-between
+
+      .main__menu
+            height: auto
+            width: 100%
+            position: absolute
+            overflow: hidden
+
+      .search__input
+            right: 5px
+            max-width: 175px
+
+      .recently-added--icon
+            margin-bottom: 24px
+
+      .btn__search
+            position: absolute
+            right: 70px
+
+@media all and (min-width: 1300px)
+      .close__menu
+            display: none
+
+      .container
+            @include flex($align-items: flex-start, $justify-content: flex-start)
+            padding-left: 360px
+
+      .main__content
+            width: 100%
+
+      .main__menu
+            transform: translateX(0)
+
+      .btn__menu
+            display: none
+            
+      .pdf-icon svg
+            width: 48px
+            height: 48px      
+
+      .search__input
+            right: -40px
+            width: 260px
+            padding: 0 16px
+
+      .btn__search
+            pointer-events: none
+
+      .top__bar--logo
+            display: none
+
+      .section__content
+            flex-flow: column wrap
+            flex: 100%
+            max-height: 820px
+            justify-content: flex-start
+
+      .filters__container, .files__container
+            width: 400px
+
+      .tables__container, .stats__container, .plan_widget
+            width: calc(100% - 400px - 24px)
+            align-self: flex-start
+
+      .files__container
+            order: 1
+            align-self: flex-start
+            height: 269px    
+            flex: 1      
+
+      .stats__container
+            @include flex
+            order: 3
+            flex: 0
+
+      .stats__card
+            width: 25%
+            height: 140px
+            flex-direction: column
+            padding: 12px
+            &:not(:first-child)
+                  margin-top: 0
+                  margin-left: $globalMargin
+
+      .card__icon
+            margin: 0
+
+      .stats
+            align-items: center
+            padding-bottom: $globalMargin
+            &__title
+                  margin: 10px 0
+                  text-align: center
+            &-no
+                  margin: 0
+
+      .tables__container
+            order: 4
+
+      .upgrade__plan, .new__widget
+            width: 50%
+            height: 248px
+      
+      .plan_widget
+            flex-direction: row
+            order: 5
+
+      .upgrade__plan
+            margin-right: $globalMargin
+
+      .plan__description
+            font-size: 12px
+            line-height: 14px
+
+      .plan__slogan
+            font-size: 19px
+            line-height: 32px
+            margin-bottom: 14px
+
+      .btn__primary--white, .btn__secondary--nobg
+            padding: 8px 11px
+            font-size: 12px
+
+      .files
+            flex-flow: column wrap
+            justify-content: space-between
+            height: 126px
+
+      .recently-added--icon:first-child
+            @include size(126px)
+
+      .order_1
+            order: 1
+      .order_2
+            order: 2
+      .order_3
+            order: 4
+      .order_4
+            order: 6
+      .order_5
+            order: 3
+      .order_6
+            order: 5
+      .order_7
+            order: 7
+
+@media all and (min-width: 1466px)
+      .btn__primary--white, .btn__secondary--nobg
+            padding: 12px 24.5px
+            font-size: 16px
+
+@media all and (min-width: 1530px)
+      .plan__description
+            font-size: 14px
+            line-height: 22px
+
+      .plan__slogan
+            font-size: 24px
+            line-height: 32px
+            margin-bottom: 14px
+
+
+@media all and (min-width: 1670px)
+      .stats
+            align-items: flex-start
+            padding: 0
+            &__card
+                  width: 25%
+                  height: 100px
+                  flex-direction: row
+                  padding: 24px
+            &__no
+                  margin-top: 4px
+            &__title
+                  text-align: left
+      .card__icon
+            margin-right: 24px
