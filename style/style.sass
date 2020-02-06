@@ -512,9 +512,11 @@ body
 .stats__container
       flex: 1
       align-self: flex-start
+      height: 475px
+      @include flex($flex-direction: column)
 
 .stats__card
-      height: 100px
+      height: 25%
       width: 100%
       padding: $globalMargin
       @include box
