@@ -43,7 +43,8 @@ overlay.addEventListener("click", () => {
 const select = document.querySelector(".select__active"),
       optionsList = document.querySelector(".options__list"),
       options = document.querySelectorAll(".option"),
-      optionLabels = document.querySelectorAll(".option__label")
+      optionLabels = document.querySelectorAll(".option__label"),
+      arrow = document.querySelector(".arrow")
 
 const closeSelect = () => {
       select.setAttribute("aria-label", "Open select list")
@@ -53,6 +54,7 @@ const closeSelect = () => {
       optionLabels.forEach(optionLabel => {
             optionLabel.tabIndex = -1
       })
+      arrow.style.transform = "rotate(0)"
 }
 
 const openSelect = () => {
@@ -63,6 +65,7 @@ const openSelect = () => {
       optionLabels.forEach(optionLabel => {
             optionLabel.tabIndex = 0
       })
+      arrow.style.transform = "rotate(180deg)"
 }
 
 select.addEventListener("click", () => {
@@ -85,21 +88,26 @@ select.addEventListener("keypress", e => {
       }
 })
 
-document.addEventListener('click', e => {
-      if (!e.target.contains(select)) {
+document.addEventListener('click', () => {
+      if (select.getAttribute("aria-expanded")) {
             closeSelect()
       }
-});
+}, true);
+
+const closeSelectAndFocus = () => {
+      closeSelect()
+      select.focus()
+}
 
 options.forEach(option => {
       option.addEventListener("click", e => {
             select.querySelector(".placeholder").innerText = e.target.value
-            closeSelect()
+            closeSelectAndFocus()
       })
       option.addEventListener("keypress", e => {
             if(e.keyCode === 13 || e.keyCode === 32) {
                   select.querySelector(".placeholder").innerText = e.target.innerText
-                  closeSelect()
+                  closeSelectAndFocus()
             }
       })
 })
