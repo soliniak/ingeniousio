@@ -17,7 +17,7 @@ const closeMenu = () => {
 }
 
 menuBtn.addEventListener("click", () => {
-      if(menuBtn.getAttribute("aria-label") == "Open menu"){
+      if (menuBtn.getAttribute("aria-label") == "Open menu") {
             mainMenu.style.transform = "translateX(0)"
             mainMenu.setAttribute("aria-hidden", false)
             menuBtn.setAttribute("aria-label", "Close menu")
@@ -50,7 +50,7 @@ const closeSelect = () => {
       select.setAttribute("aria-label", "Open select list")
       select.setAttribute("aria-expanded", false)
       optionsList.style.height = 0
-      optionsList.setAttribute("aria-hidden", true) 
+      optionsList.setAttribute("aria-hidden", true)
       optionLabels.forEach(optionLabel => {
             optionLabel.tabIndex = -1
       })
@@ -69,7 +69,7 @@ const openSelect = () => {
 }
 
 select.addEventListener("click", () => {
-      if(select.getAttribute("aria-label") == "Open select list"){
+      if (select.getAttribute("aria-label") == "Open select list") {
             openSelect()
       } else {
             closeSelect()
@@ -81,15 +81,15 @@ optionLabels[optionLabels.length - 1].addEventListener("focusout", () => {
 })
 
 select.addEventListener("keypress", e => {
-      if(select.getAttribute("aria-label") == "Open select list" && (e.keyCode === 13 || e.keyCode === 32)){
+      if (select.getAttribute("aria-label") == "Open select list" && (e.keyCode === 13 || e.keyCode === 32)) {
             openSelect()
       } else {
             closeSelect()
       }
 })
 
-document.addEventListener('click', () => {
-      if (select.getAttribute("aria-expanded")) {
+document.addEventListener('click', e => {
+      if (select.getAttribute("aria-expanded") === "true" && e.target !== select) {
             closeSelect()
       }
 }, true);
@@ -105,7 +105,7 @@ options.forEach(option => {
             closeSelectAndFocus()
       })
       option.addEventListener("keypress", e => {
-            if(e.keyCode === 13 || e.keyCode === 32) {
+            if (e.keyCode === 13 || e.keyCode === 32) {
                   select.querySelector(".placeholder").innerText = e.target.innerText
                   closeSelectAndFocus()
             }
@@ -114,10 +114,10 @@ options.forEach(option => {
 
 const checkboxes = document.querySelectorAll(".checkbox__container")
 
-checkboxes.forEach( checkbox => {
-      checkbox.addEventListener("keypress", e => { 
-            if(e.keyCode === 13 || e.keyCode === 32) {
-                  if(e.target.querySelector(".actual__checkbox").checked == false) {
+checkboxes.forEach(checkbox => {
+      checkbox.addEventListener("keypress", e => {
+            if (e.keyCode === 13 || e.keyCode === 32) {
+                  if (e.target.querySelector(".actual__checkbox").checked == false) {
                         e.target.querySelector(".actual__checkbox").checked = true
                   } else {
                         e.target.querySelector(".actual__checkbox").checked = false
@@ -148,12 +148,12 @@ const btnSearch = document.querySelector(".btn__search"),
 
 let intViewportWidth = window.innerWidth
 
-if (intViewportWidth >= 1300){
+if (intViewportWidth >= 1300) {
       btnSearch.disabled = true
 }
 
 window.addEventListener('resize', () => {
-      if(intViewportWidth >= 1300){
+      if (intViewportWidth >= 1300) {
             btnSearch.disabled = true
       } else {
             btnSearch.disabled = false
@@ -165,13 +165,13 @@ window.addEventListener('resize', () => {
 btnSearch.addEventListener("click", () => {
       searchInput.style.width = "200px"
       searchInput.style.padding = "0 16px"
-      let idleTimer = setTimeout(()=> {
+      let idleTimer = setTimeout(() => {
             searchInput.style.width = "0"
             searchInput.style.padding = "0"
       }, 8000)
       searchInput.addEventListener("input", () => {
             clearTimeout(idleTimer)
-            idleTimer = setTimeout(()=> {
+            idleTimer = setTimeout(() => {
                   searchInput.style.width = "0"
                   searchInput.style.padding = "0"
             }, 8000)
