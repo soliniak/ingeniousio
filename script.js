@@ -17,7 +17,7 @@ const closeMenu = () => {
 }
 
 menuBtn.addEventListener("click", () => {
-      if(menuBtn.getAttribute("aria-label") == "Open menu"){
+      if (menuBtn.getAttribute("aria-label") == "Open menu") {
             mainMenu.style.transform = "translateX(0)"
             mainMenu.setAttribute("aria-hidden", false)
             menuBtn.setAttribute("aria-label", "Close menu")
@@ -43,16 +43,18 @@ overlay.addEventListener("click", () => {
 const select = document.querySelector(".select__active"),
       optionsList = document.querySelector(".options__list"),
       options = document.querySelectorAll(".option"),
-      optionLabels = document.querySelectorAll(".option__label")
+      optionLabels = document.querySelectorAll(".option__label"),
+      arrow = document.querySelector(".arrow")
 
 const closeSelect = () => {
       select.setAttribute("aria-label", "Open select list")
       select.setAttribute("aria-expanded", false)
       optionsList.style.height = 0
-      optionsList.setAttribute("aria-hidden", true) 
+      optionsList.setAttribute("aria-hidden", true)
       optionLabels.forEach(optionLabel => {
             optionLabel.tabIndex = -1
       })
+      arrow.style.transform = "rotate(0)"
 }
 
 const openSelect = () => {
@@ -63,10 +65,11 @@ const openSelect = () => {
       optionLabels.forEach(optionLabel => {
             optionLabel.tabIndex = 0
       })
+      arrow.style.transform = "rotate(180deg)"
 }
 
 select.addEventListener("click", () => {
-      if(select.getAttribute("aria-label") == "Open select list"){
+      if (select.getAttribute("aria-label") == "Open select list") {
             openSelect()
       } else {
             closeSelect()
@@ -78,7 +81,7 @@ optionLabels[optionLabels.length - 1].addEventListener("focusout", () => {
 })
 
 select.addEventListener("keypress", e => {
-      if(select.getAttribute("aria-label") == "Open select list" && (e.keyCode === 13 || e.keyCode === 32)){
+      if (select.getAttribute("aria-label") == "Open select list" && (e.keyCode === 13 || e.keyCode === 32)) {
             openSelect()
       } else {
             closeSelect()
@@ -86,30 +89,35 @@ select.addEventListener("keypress", e => {
 })
 
 document.addEventListener('click', e => {
-      if (!e.target.contains(select)) {
+      if (select.getAttribute("aria-expanded") === "true" && e.target !== select) {
             closeSelect()
       }
-});
+}, true);
+
+const closeSelectAndFocus = () => {
+      closeSelect()
+      select.focus()
+}
 
 options.forEach(option => {
       option.addEventListener("click", e => {
             select.querySelector(".placeholder").innerText = e.target.value
-            closeSelect()
+            closeSelectAndFocus()
       })
       option.addEventListener("keypress", e => {
-            if(e.keyCode === 13 || e.keyCode === 32) {
+            if (e.keyCode === 13 || e.keyCode === 32) {
                   select.querySelector(".placeholder").innerText = e.target.innerText
-                  closeSelect()
+                  closeSelectAndFocus()
             }
       })
 })
 
 const checkboxes = document.querySelectorAll(".checkbox__container")
 
-checkboxes.forEach( checkbox => {
-      checkbox.addEventListener("keypress", e => { 
-            if(e.keyCode === 13 || e.keyCode === 32) {
-                  if(e.target.querySelector(".actual__checkbox").checked == false) {
+checkboxes.forEach(checkbox => {
+      checkbox.addEventListener("keypress", e => {
+            if (e.keyCode === 13 || e.keyCode === 32) {
+                  if (e.target.querySelector(".actual__checkbox").checked == false) {
                         e.target.querySelector(".actual__checkbox").checked = true
                   } else {
                         e.target.querySelector(".actual__checkbox").checked = false
@@ -140,12 +148,12 @@ const btnSearch = document.querySelector(".btn__search"),
 
 let intViewportWidth = window.innerWidth
 
-if (intViewportWidth >= 1300){
+if (intViewportWidth >= 1300) {
       btnSearch.disabled = true
 }
 
 window.addEventListener('resize', () => {
-      if(intViewportWidth >= 1300){
+      if (intViewportWidth >= 1300) {
             btnSearch.disabled = true
       } else {
             btnSearch.disabled = false
@@ -157,13 +165,13 @@ window.addEventListener('resize', () => {
 btnSearch.addEventListener("click", () => {
       searchInput.style.width = "200px"
       searchInput.style.padding = "0 16px"
-      let idleTimer = setTimeout(()=> {
+      let idleTimer = setTimeout(() => {
             searchInput.style.width = "0"
             searchInput.style.padding = "0"
       }, 8000)
       searchInput.addEventListener("input", () => {
             clearTimeout(idleTimer)
-            idleTimer = setTimeout(()=> {
+            idleTimer = setTimeout(() => {
                   searchInput.style.width = "0"
                   searchInput.style.padding = "0"
             }, 8000)
